@@ -26,6 +26,9 @@ function add() {
 
 }
 
+function clear() {
+    
+}
 
 function getResult() {
 
