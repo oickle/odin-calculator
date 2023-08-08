@@ -15,9 +15,21 @@ body {
     border-radius: 8px;
 }
 
-.screen {
+.display {
     flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: grey;
+}
+
+.screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 100px;
+    background-color: white;
 }
 
 button {
