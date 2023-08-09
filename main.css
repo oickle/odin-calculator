@@ -89,7 +89,7 @@ button:active {
     background-color: var(--grey);
 }
 
-.operation {
+.operator {
     background-color: var(--light-green);
 }
 
