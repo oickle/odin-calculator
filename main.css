@@ -82,7 +82,7 @@ button:active {
 }
 
 .operation {
-    background-color: orange;
+    background-color: var(--light-green);
 }
 
 .zero {
