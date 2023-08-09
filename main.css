@@ -1,3 +1,14 @@
+:root {
+    /* Stores custom color pallete variables */
+    --off-black: rgb(41, 41, 41);
+    --off-white: rgb(244, 244, 244);
+    --dark-green: #214E34;
+    --light-green: #5C7457;
+    --grey: #979B8D;
+    --tan: #C1BCAC;
+    --pink: #EFD0CA;
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -6,44 +17,80 @@ body {
 }
 
 .back {
+    background-color: var(--off-black);
+
     flex: 1;
     display: flex;
     flex-direction: column;
-    height: 500px;
-    max-width: 400px;
+
+    height: 600px;
+    max-width: 425px;
+
+    padding: 20px 0;
+
     border: 2px solid black;
     border-radius: 8px;
 }
 
-.display {
+.screen {
     flex: 1;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: grey;
+    justify-content: flex-end;
+    align-items: flex-end;
 }
 
-.screen {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 350px;
-    height: 100px;
-    background-color: white;
+.results {
+    margin: 0 40px 20px 0;
+
+    color: var(--off-white);
+    font-size: 60px;
 }
+
 
 button {
-    box-sizing: border-box;
-    width: 100px;
-    height: 60px;
+    transition: all .1s ease-in-out;
+
+    background-color: var(--tan);
+
+    border: none;
+    border-radius: 12px;
+
+    margin: 10px;
+
+    width: 70px;
+    height: 70px;
+
+    font-size: 30px;
+    font-weight: 400;
+    color: var(--off-white);
+}
+
+/* Makes button grow a little and become brighter when hovered over*/
+button:hover {
+    filter: brightness(105%);
+    transform: scale(1.015);
+}
+
+/* Makes button shrink and get darker when pressed down*/
+button:active {
+    filter: brightness(80%);
+    transform: scale(0.975);
+}
+
+.number, .decimal {
+    background-color: var(--grey);
+}
+
+.operation {
+    background-color: orange;
+}
+
+.zero {
+    width: 160px;
 }
 
 .buttons {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
-
-.zero {
-    width: 200px;
-}
-
