@@ -8,37 +8,35 @@
     </head>
     <body>
         <div class="back">
-            <div class="display">
-                <div class="screen">
-                    <div class="results">
-                        RESULTS
-                    </div>
+            <div class="screen">
+                <div class="results">
+                    5318008
                 </div>
             </div>
             <div class="buttons">
                 <button onclick="clear()">C</button>
                 <button onclick="setSign()">+/-</button>
                 <button onclick="setPercent()">%</button>
-                <button onclick="divide()">÷</button>
+                <button class="operation" onclick="divide()">÷</button>
 
                 <button class="number">7</button>
                 <button class="number">8</button>
                 <button class="number">9</button>
-                <button onclick="multiply()">*</button>
+                <button class="operation" onclick="multiply()">x</button>
                 
                 <button class="number">4</button>
                 <button class="number">5</button>
                 <button class="number">6</button>
-                <button onclick="subtract()">-</button>
+                <button class="operation" onclick="subtract()">-</button>
 
                 <button class="number">1</button>
                 <button class="number">2</button>
                 <button class="number">3</button>
-                <button onclick="add()">+</button>
+                <button class="operation" onclick="add()">+</button>
 
                 <button class="number zero">0</button>
-                <button onclick="setDecimal()">.</button>
-                <button onclick="getResult()">=</button>
+                <button class="decimal" onclick="setDecimal()">.</button>
+                <button class="operation" onclick="getResult()">=</button>
             </div>
         </div>
     </body>
