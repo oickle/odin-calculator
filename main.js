@@ -23,6 +23,13 @@ function addListeners() {
 }
 
 function addDigit(e) {
+    // Wipes out old stuff after = is hit ... 
+    // Allows for new equation to be typed by simply clicking a new integer
+    if (operator == '=') {
+        erase();
+        erase();
+    }
+
     eraseButton.textContent = 'C';
 
     const digit = e.target.textContent;
@@ -82,13 +89,19 @@ function divide() {
     operator = '/'; // set new operator
 }
 
+function equals() {
+    operate(); // run operation using previous operator
+    operator = '='; // set new operator
+}
+
 function erase() {
-    if (current != 0) { // if there is a current number, empty it
-        current = 0;
+    if (current != '0') { // if there is a current number, empty it
+        current = '0';
     }
     else { // wipe everything else that is left
         total = '0';
         historyArray = []
+        operator = '';
     }
 
     eraseButton.textContent = (current == '0' && total == '0') ? 'AC' : 'C';
@@ -108,6 +121,7 @@ function updateDisplay(display) {
 
 function operate() {
     historyArray.push(current);
+    
     switch (operator) {
         case '+':
             total = +total + +current;
