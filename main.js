@@ -24,18 +24,19 @@ function addListeners() {
 function addDigit(e) {
     eraseButton.textContent = 'C';
 
-    if (current == 0) current = ''; // set to empty string temporarily to concat
-
     const buttonLabel = e.target.textContent;
-    current = +(`${current}${buttonLabel}`); // concats number on clicked button to previous number
+    console.log(current.toString());
+    if (current.toString() === '0') current = buttonLabel; // replaces zero if it is ONLY zero...allows for decimals < 1
+    else current = +(`${current}${buttonLabel}`); // concats number on clicked button to previous number
 
     updateDisplay(current);
 }
 
 function setSign() {
-    current *= -1;
-
-    updateDisplay(current);
+    if (current != 0) { 
+        current *= -1;
+        updateDisplay(current);
+    }
 }
 
 function setPercent() {
