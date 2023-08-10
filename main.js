@@ -1,6 +1,6 @@
-let previous = 0;
+let total = 0; // total is my "previous" integer
 let current = 0;
-let result = 0;
+
 let operator = '';
 
 let historyArray = [];
@@ -51,31 +51,35 @@ function setDecimal() {
 }
 
 function add() {
-
+    operate(); // run operation using previous operator
+    operator = '+'; // set new operator
 }
 
-function subtract(a, b) {
-
+function subtract() {
+    operate(); // run operation using previous operator
+    operator = '-'; // set new operator
 }
 
-function multiply(a, b) {
-
+function multiply() {
+    operate(); // run operation using previous operator
+    operator = '*'; // set new operator
 }
 
 function divide() {
-
+    operate(); // run operation using previous operator
+    operator = '/'; // set new operator
 }
 
 function erase() {
     if (current != 0) { // if there is a current number, empty it
         current = 0;
     }
-    else if ((previous != 0)) { // wipe everything else that is left
-        previous = 0;
+    else { // wipe everything else that is left
+        total = 0;
         historyArray = []
     }
 
-    eraseButton.textContent = (current == 0 && previous == 0) ? 'AC' : 'C';
+    eraseButton.textContent = (current == 0 && total == 0) ? 'AC' : 'C';
 
     updateDisplay(current);
 }
@@ -83,17 +87,36 @@ function erase() {
 function updateDisplay(display) {
     results.textContent = display;
 
-    let newHistory = '';
+    /*let newHistory = '';
     for (x in historyArray) {
         newHistory = newHistory.concat(historyArray[x].toString(), ' ');
     }
-    history.textContent = newHistory;
+    history.textContent = newHistory;*/
 }
 
-// takes an operator and two numbers
-function operate(a, b) {
-         
-    updateDisplay();
+function operate() {
+    historyArray.push(current);
+    switch (operator) {
+        case '+':
+            total += current;
+            break;
+        case '-':
+            total -= current;
+            break;
+        case '*':
+            total *= current;
+            break;
+        case '/':
+            total /= current;
+            break;
+        default:
+            if (historyArray.length == 1) total = current; // called when no operator is given
+            break;
+    }
+
+    operator = '';
+    current = 0;
+    updateDisplay(total);
 }
 
 addListeners();
