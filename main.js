@@ -1,5 +1,6 @@
-let total = 0; // total is my "previous" integer
-let current = 0;
+// strings in order to make -0 possible
+let total = '0'; // total is equivalent to "previous" value
+let current = '0';
 
 let operator = '';
 
@@ -24,19 +25,23 @@ function addListeners() {
 function addDigit(e) {
     eraseButton.textContent = 'C';
 
-    const buttonLabel = e.target.textContent;
-    console.log(current.toString());
-    if (current.toString() === '0') current = buttonLabel; // replaces zero if it is ONLY zero...allows for decimals < 1
-    else current = +(`${current}${buttonLabel}`); // concats number on clicked button to previous number
+    const digit = e.target.textContent;
+    if (current === '0') current = digit;
+    else if (current === '-0') current = `-${digit}`;
+    else current = `${current}${digit}`;
 
-    updateDisplay(current);
+    updateDisplay(current.toString());
 }
 
 function setSign() {
-    if (current != 0) { 
-        current *= -1;
-        updateDisplay(current);
+    if (current.includes('-')) {
+        current = current.replace('-', ''); // replaces first instance of negative
     }
+    else {
+        current = `-${current}`; // adds negative to start
+    }
+
+    updateDisplay(current);
 }
 
 function setPercent() {
@@ -44,9 +49,15 @@ function setPercent() {
 }
 
 function setDecimal() {
-    // if there is already a decimal, remove it.
-    if (current.toString().includes('.')) current = +current.toString().replace('.', '');
+    // Makes sure it is still a string
+    current = current.toString();
+
+    // If there is already a decimal, remove it.
+    if (current.includes('.')) current = current.replace('.', '');
     else current = current.toString().concat('.'); // otherwise, add one
+
+    // Checks whether the first
+    if (current.charAt(0) == '0' && !current.includes('.')) current = current.replace(0, '');
 
     updateDisplay(current);
 }
@@ -76,11 +87,11 @@ function erase() {
         current = 0;
     }
     else { // wipe everything else that is left
-        total = 0;
+        total = '0';
         historyArray = []
     }
 
-    eraseButton.textContent = (current == 0 && total == 0) ? 'AC' : 'C';
+    eraseButton.textContent = (current == '0' && total == '0') ? 'AC' : 'C';
 
     updateDisplay(current);
 }
@@ -99,24 +110,25 @@ function operate() {
     historyArray.push(current);
     switch (operator) {
         case '+':
-            total += current;
+            total = +total + +current;
             break;
         case '-':
-            total -= current;
+            total = +total - +current;
             break;
         case '*':
-            total *= current;
+            total = +total * +current;
             break;
         case '/':
-            total /= current;
+            total = +total / +current;
             break;
         default:
             if (historyArray.length == 1) total = current; // called when no operator is given
             break;
     }
 
+    total = total.toString();
     operator = '';
-    current = 0;
+    current = '0';
     updateDisplay(total);
 }
 
