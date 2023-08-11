@@ -23,21 +23,23 @@ function addListeners() {
 }
 
 function addDigit(e) {
-    // Wipes out old stuff after = is hit ... 
-    // Allows for new equation to be typed by simply clicking a new integer
-    if (operator == '=') {
-        erase();
-        erase();
+    if (current.length < 9) {
+        // Wipes out old stuff after = is hit ... 
+        // Allows for new equation to be typed by simply clicking a new integer
+        if (operator == '=') {
+            erase();
+            erase();
+        }
+
+        eraseButton.textContent = 'C';
+
+        const digit = e.target.textContent;
+        if (current === '0') current = digit;
+        else if (current === '-0') current = `-${digit}`;
+        else current = `${current}${digit}`;
+
+        updateDisplay(current.toString());
     }
-
-    eraseButton.textContent = 'C';
-
-    const digit = e.target.textContent;
-    if (current === '0') current = digit;
-    else if (current === '-0') current = `-${digit}`;
-    else current = `${current}${digit}`;
-
-    updateDisplay(current.toString());
 }
 
 function setSign() {
@@ -94,6 +96,10 @@ function equals() {
     operator = '='; // set new operator
 }
 
+function round() {
+    return 'oopie';
+}
+
 function erase() {
     if (current != '0') { // if there is a current number, empty it
         current = '0';
@@ -141,9 +147,11 @@ function operate() {
     }
 
     total = total.toString();
+    // prevents total from going out of boundaries of calculator
+    let display = (total.length > 9) ? round(total) : total;
+    updateDisplay(display);
     operator = '';
     current = '0';
-    updateDisplay(total);
 }
 
 addListeners();
