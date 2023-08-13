@@ -98,9 +98,7 @@ function equals() {
 
 function round(str) {
     let num = +str 
-    // Rounding works differently depending if it is a decimal or not
-    if (str.includes('.')) return num.toFixed(3); // rounds to 3 decimal places
-    else return 'whole!';
+    return num.toExponential(3);
 }
 
 function erase() {
