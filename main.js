@@ -22,7 +22,6 @@ function addListeners() {
     eraseButton.addEventListener('click', erase);
 
     document.addEventListener('keydown', function(event) {
-        event.preventDefault();
         const digits = '0123456789';
         if (digits.includes(event.key)) {
             addDigit(event.key);
@@ -30,6 +29,7 @@ function addListeners() {
         else {
             switch (event.key) {
                 case 'Enter':
+                    event.preventDefault();
                     equals();
                     break;
                 case '=':
@@ -60,6 +60,7 @@ function addListeners() {
                     multiply();
                     break;
                 case '/':
+                    event.preventDefault();
                     divide();
                     break;
                 default:
@@ -109,7 +110,10 @@ function setPercent() {
     let percentage = +current / 100;
     current = percentage.toString();
 
-    updateDisplay(current);
+
+    // Prevents percentage from going out of boundaries of calculator
+    let display = (current.length > 9) ? round(current) : current;
+    updateDisplay(display);
 }
 
 function setDecimal() {
@@ -181,10 +185,22 @@ function erase() {
 }
 
 function updateDisplay(display) {
+    // Update results
     results.textContent = (display === undefined) ? results.textContent : display; // only updates results if something is passed
 
+    // Update history
     let newHistory = '';
-    for (x in historyArray) {
+
+    // Prevents history text from overflowing and showing every change
+    let start = 0;
+    let end = historyArray.length;
+    if (historyArray.length > 12) { // shows the last six most recent digit additions
+        newHistory = newHistory.concat('...', ' '); // adds elipses to front of history for detail
+        start = historyArray.length - 12;
+        end = start + 12;
+    }
+    
+    for (let x = start; x < end; x++) {
         newHistory = newHistory.concat(historyArray[x].toString(), ' ');
     }
     history.textContent = newHistory;
