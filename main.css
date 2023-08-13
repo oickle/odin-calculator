@@ -72,7 +72,7 @@ button {
     text-align: center;
     font-size: 30px;
     font-weight: 400;
-    color: var(--off-white);
+    color: var(--pink);
 }
 
 /* Makes button grow a little and become brighter when hovered over*/
