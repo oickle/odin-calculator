@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
 :root {
     /* Stores custom color pallete variables */
     --off-black: rgb(41, 41, 41);
@@ -13,6 +15,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Inter', sans-serif;
     height: 100vh;
 }
 
@@ -70,6 +73,7 @@ button {
     height: 70px;
     
     text-align: center;
+    font-family: 'Inter', sans-serif;
     font-size: 30px;
     font-weight: 400;
     color: var(--off-white);
