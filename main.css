@@ -56,6 +56,7 @@ body {
 
 
 button {
+    flex: 0;
     transition: all .1s ease-in-out;
 
     background-color: var(--tan);
@@ -63,7 +64,7 @@ button {
     border: none;
     border-radius: 12px;
 
-    margin: 10px;
+    margin: 0 10px;
 
     width: 70px;
     height: 70px;
@@ -102,4 +103,8 @@ button:active {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+}
+
+.row {
+    margin: 10px 0;
 }
