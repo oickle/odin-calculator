@@ -148,8 +148,16 @@ function operate() {
     }
 
     total = total.toString();
-    // prevents total from going out of boundaries of calculator
+
+    // Prevents total from going out of boundaries of calculator
     let display = (total.length > 9) ? round(total) : total;
+    
+    // Prevents issues with dividing by 0
+    if (total == Infinity) {
+        display = "wow..."; 
+        total = 0;
+    }
+
     updateDisplay(display);
     operator = '';
     current = '0';
