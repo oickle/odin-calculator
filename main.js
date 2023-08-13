@@ -41,6 +41,9 @@ function addListeners() {
                 case '_': // toggle negative with underscore
                     setSign();
                     break;
+                case '%':
+                    setPercent();
+                    break;
                 case '.':
                     setDecimal();
                     break;
@@ -103,19 +106,18 @@ function setSign() {
 }
 
 function setPercent() {
-    
+    let percentage = +current / 100;
+    current = percentage.toString();
+
+    updateDisplay(current);
 }
 
 function setDecimal() {
     // Makes sure it is still a string
     current = current.toString();
 
-    // If there is already a decimal, remove it.
-    if (current.includes('.')) current = current.replace('.', '');
-    else current = current.toString().concat('.'); // otherwise, add one
-
-    // Checks whether the first
-    if (current.charAt(0) == '0' && !current.includes('.')) current = current.replace(0, '');
+    // If there is no decimal, add one
+    if (!current.includes('.')) current = current.toString().concat('.');
 
     updateDisplay(current);
 }
@@ -189,6 +191,7 @@ function updateDisplay(display) {
 }
 
 function operate() {
+    // Allows for the history to show
     let historyNew = (operator === '=') ? total : current;
     historyArray.push(historyNew);
     
