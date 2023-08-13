@@ -16,13 +16,64 @@ let eraseButton = document.querySelector('.erase');
 
 function addListeners() {
     numberButtons.forEach(button => {
-        button.addEventListener('click', addDigit);
+        button.addEventListener('click', getDigit);
     });
 
     eraseButton.addEventListener('click', erase);
+
+    document.addEventListener('keydown', function(event) {
+        event.preventDefault();
+        const digits = '0123456789';
+        if (digits.includes(event.key)) {
+            addDigit(event.key);
+        }
+        else {
+            console.log(event.key)
+            switch (event.key) {
+                case 'Enter':
+                    equals();
+                    break;
+                case '=':
+                    equals();
+                    break;
+                case 'Backspace':
+                    erase();
+                    break;
+                case '_': // toggle negative with underscore
+                    setSign();
+                    break;
+                case '.':
+                    setDecimal();
+                    break;
+                case '+':
+                    add();
+                    break;
+                case '-':
+                    subtract();
+                    break;
+                case '*':
+                    multiply();
+                    break;
+                case 'x':
+                    multiply();
+                    break;
+                case '/':
+                    divide();
+                    break;
+                default:
+                    break;
+            }
+        }
+    });
 }
 
-function addDigit(e) {
+// grabs what digit is written on the button and passes it forward
+// allows for keyboard functionality since it is not limited to button presses
+function getDigit(e) {
+    addDigit(e.target.textContent);
+}
+
+function addDigit(digit) {
     if (current.length < 9) {
         // Wipes out old stuff after = is hit ... 
         // Allows for new equation to be typed by simply clicking a new integer
@@ -33,7 +84,6 @@ function addDigit(e) {
 
         eraseButton.textContent = 'C';
 
-        const digit = e.target.textContent;
         if (current === '0') current = digit;
         else if (current === '-0') current = `-${digit}`;
         else current = `${current}${digit}`;
