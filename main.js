@@ -70,8 +70,8 @@ function addListeners() {
     });
 }
 
-// grabs what digit is written on the button and passes it forward
-// allows for keyboard functionality since it is not limited to button presses
+// Grabs what digit is written on the button and passes it forward
+// Allows for keyboard functionality since it is not limited to button presses
 function getDigit(e) {
     addDigit(e.target.textContent);
 }
@@ -241,6 +241,8 @@ function operate() {
     }
 
     updateDisplay(display);
+
+    // Resets values
     operator = '';
     current = '0';
 }
