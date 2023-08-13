@@ -28,7 +28,6 @@ function addListeners() {
             addDigit(event.key);
         }
         else {
-            console.log(event.key)
             switch (event.key) {
                 case 'Enter':
                     equals();
@@ -123,27 +122,40 @@ function setDecimal() {
 
 function add() {
     operate(); // run operation using previous operator
+    historyArray.push('+');
     operator = '+'; // set new operator
 }
 
 function subtract() {
     operate(); // run operation using previous operator
+    historyArray.push('-');
     operator = '-'; // set new operator
 }
 
 function multiply() {
     operate(); // run operation using previous operator
+    historyArray.push('x');
     operator = '*'; // set new operator
 }
 
 function divide() {
     operate(); // run operation using previous operator
+    historyArray.push('÷');
     operator = '/'; // set new operator
 }
 
 function equals() {
-    operate(); // run operation using previous operator
-    operator = '='; // set new operator
+    // Lets quick restart by double tapping '='
+    if (operator === '=') {
+        erase();
+        erase();
+    }
+    else {
+        operate(); // run operation using previous operator
+        historyArray.push('=');
+        updateDisplay();
+        operator = '='; // set new operator
+    }
 }
 
 function round(str) {
@@ -167,17 +179,18 @@ function erase() {
 }
 
 function updateDisplay(display) {
-    results.textContent = display;
+    results.textContent = (display === undefined) ? results.textContent : display; // only updates results if something is passed
 
-    /*let newHistory = '';
+    let newHistory = '';
     for (x in historyArray) {
         newHistory = newHistory.concat(historyArray[x].toString(), ' ');
     }
-    history.textContent = newHistory;*/
+    history.textContent = newHistory;
 }
 
 function operate() {
-    historyArray.push(current);
+    let historyNew = (operator === '=') ? total : current;
+    historyArray.push(historyNew);
     
     switch (operator) {
         case '+':
